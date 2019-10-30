@@ -16,6 +16,11 @@
     "url": "https://github.com/mubarak23/Teamwork/issues"
   },
   "homepage": "https://github.com/mubarak23/Teamwork#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
   "devDependencies": {
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
