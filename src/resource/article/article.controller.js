@@ -89,3 +89,22 @@ exports.getArticles = (req, res) =>{
             }
         )
 }
+
+exports.getOneArticle = (req, res) =>{
+    const id = req.params.id;
+    Article.findById({_id: id}).then(
+        (Article) =>{
+            res.status(200).json({
+                status: 'Success',
+                data: Article
+            });
+        }
+    ).catch(
+        (error) => {
+            res.status(400).json({
+                status: error,
+                error: "Unable to single article"
+            });
+        }
+    )
+}
