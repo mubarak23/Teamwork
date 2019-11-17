@@ -1,18 +1,18 @@
 const Article = require('./article');
 
 exports.createArticle = (req, res) => {
-    const Article = new Article({
+    console.log(req.body);
+    const article = new Article({
         title: req.body.title,
         body: req.body.body
     });
-    Article.save().then(
+    article.save().then(
         () =>{
             res.status(201).json({
                 status: "success",
                 data: {
                     message: 'Article Created Successfully',
                     articleId:article._id,
-                    createOn: article.create_at.toISOString(),
                     title: article.title
                 }
             })
@@ -108,3 +108,5 @@ exports.getOneArticle = (req, res) =>{
         }
     )
 }
+
+//route.post('/create', )
