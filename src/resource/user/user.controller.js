@@ -45,8 +45,10 @@ exports.signup = (req, res, next) => {
 }
 
 exports.login = (req, res, next) =>{
+    //return res.json(req.body.email);
     User.findOne({email: req.body.email}).then(
         (user) =>{
+            return res.json(user);
             if(!user){
                 return res.status(401).json({
                     status: error,

@@ -1,16 +1,16 @@
 
 const { checkEmail, getUserId, encrypt, getToken} = require('../../config/index');
-
-const UserSignup =  (req, res) =>{
+const User = require('../user/user');
+exports.UserSignup =  (req, res) =>{ 
+    //return res.json(req.body);
     const {
         firstName, lastName, password, gender,
-         roleId, jobRole, email, depatment, address
+         roleId, jobRole, email, department, address
     } = req.body;
-
-    const checkEmail = await checkEmail(email);
-    const hash = encrypt(password);
+    const check_email =  checkEmail(email);
+    const hash =  encrypt(password);
     const user = new User({
-        email: checkEmail,
+        email,
         password: hash,
         roleId,
         firstName,
@@ -18,7 +18,7 @@ const UserSignup =  (req, res) =>{
         gender,
         jobRole,
         department,
-        addess
+        address
     });
     user.save().then(
         (user) =>{
@@ -28,7 +28,8 @@ const UserSignup =  (req, res) =>{
                 data: {
                     message: "User Account Successfully Created",
                     userID: user._id,
-                    token
+                    token,
+                    user
                 }
             })
         }
@@ -42,3 +43,5 @@ const UserSignup =  (req, res) =>{
     )
 }
     
+
+
