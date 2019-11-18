@@ -3,13 +3,16 @@ const Article = require('../resource/article/article');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-exports.encrypt = async (password) => {
-    if(password){
-        const hashed = await bcrypt.hash(password, 10);
-        return hashed;
-    }
+exports.encrypt =  (password) => {
+    //if(password){
+        //const hashed =  bcrypt.hash(password, 10);
+      //  return hashed;
+    //}
+    //return password;
     const err = 'Password field cannot be empty';
-    throw err;
+    //throw err;
+    const hashed =  bcrypt.hash(password, 10);;
+    return hashed;
 }
 
 exports.getToken =  (userId) => {

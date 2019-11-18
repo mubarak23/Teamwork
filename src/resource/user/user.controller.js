@@ -8,33 +8,37 @@ exports.signup = (req, res, next) => {
             const user = new User({
                 email: req.body.email,
                 password: hash,
+                roleId: req.body.roleId,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 gender: req.body.gender,
                 jobRole: req.body.jobRole,
                 department: req.body.department,
-                addess: req.body.addess
+                address: req.body.address
             });
             user.save().then(
                 (user) =>{
+                    //return res.json(user);
                     const token = jwt.sign(
                         {userID: user._id},
-                        'RANDOM_TOKEN_SECRET',
+                        `${process.env.RANDOM_TOKEN_SECRET}`,
                         {  expiresIn: '24h'}
                     );
-                    res.status(200).json({
+                    return res.status(200).json({
                         status: "success",
                         data: {
                             message: "User Account Successfully Created",
                             userID: user._id,
+                            user,
                             //drop token here
                             token
+                            
                         }
                     })
                 }
             ).catch(
                 (error) => {
-                    res.status(402).json({
+                   return res.status(402).json({
                         status: error,
                         error: "Unable to single article"
                     });
@@ -48,7 +52,7 @@ exports.login = (req, res, next) =>{
     //return res.json(req.body.email);
     User.findOne({email: req.body.email}).then(
         (user) =>{
-            return res.json(user);
+            //return res.json(user);
             if(!user){
                 return res.status(401).json({
                     status: error,
@@ -65,7 +69,7 @@ exports.login = (req, res, next) =>{
                   }
                 const token = jwt.sign(
                     {userID: user._id},
-                    'RANDOM_TOKEN_SECRET',
+                    `${process.env.RANDOM_TOKEN_SECRET}`,
                     {  expiresIn: '24h'}
                 );
                 return res.status(200).json({

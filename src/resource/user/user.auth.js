@@ -7,11 +7,13 @@ exports.UserSignup =  (req, res) =>{
         firstName, lastName, password, gender,
          roleId, jobRole, email, department, address
     } = req.body;
+    //return res.json(password);
     const check_email =  checkEmail(email);
     const hash =  encrypt(password);
+    //return res.json(hash);
     const user = new User({
         email,
-        password: hash,
+        password,
         roleId,
         firstName,
         lastName,
@@ -20,6 +22,7 @@ exports.UserSignup =  (req, res) =>{
         department,
         address
     });
+    return res.json(user);
     user.save().then(
         (user) =>{
             const token = getToken(user._id);
