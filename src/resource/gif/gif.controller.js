@@ -1,4 +1,5 @@
 const Gif = require('./git');
+const Comment = require('./git.comment');
 const { getUserId, processGifToUrl } = require('../../config/index');
 
 exports.PostGif = (req, res) =>{
@@ -89,6 +90,35 @@ exports.gifFeed = (req, res) => {
                 status: error,
                 error: "Unable to get gif feed"
             })
+        }
+    )
+}
+
+exports.postGifComment = (req, res) =>{
+    const comment = new Comment({
+        gifId: req.params.id,
+        gifTitle: req.body.title,
+        userId: req.body.userId,
+        comment: req.body.comment
+    });
+    comment.save().then(
+        (data) => {
+            return res.status(200).json({
+                status: "success",
+                data: {
+                    message: "Comment successfully created",
+                    createOn: data.createdOn,
+                    gitTitle: data.gifTitle,
+                    comment: data.comment
+                }
+            }).catch(
+                (error) => {
+                    return res.status(400).json({
+                        status: error,
+                        error: "Unsble to make comment on gif"
+                    })
+                }
+            )
         }
     )
 }
