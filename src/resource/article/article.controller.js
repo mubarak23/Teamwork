@@ -8,7 +8,7 @@ exports.createArticle = (req, res) => {
     });
     article.save().then(
         () =>{
-            res.status(201).json({
+           return res.status(201).json({
                 status: "success",
                 data: {
                     message: 'Article Created Successfully',
@@ -18,7 +18,7 @@ exports.createArticle = (req, res) => {
             })
         }
     ).catch((error) =>{
-        res.status(400).json({
+       return res.status(400).json({
             status: error,
             error: "Unable to create new article"
         });
@@ -33,7 +33,7 @@ exports.upadteArticle = (req, res) =>{
     };
     Article.updateOne({_id: id, Article_modefied}).then(
         () =>{
-            res.status(201).json({
+           return res.status(201).json({
                 status: "success",
                 data: {
                     message: "Article Upated Successfully",
@@ -44,7 +44,7 @@ exports.upadteArticle = (req, res) =>{
         }
     ).catch(
         (error) => {
-            res.status(400).json({
+           return res.status(400).json({
                 status: error,
                 error: "Unable to updated article"
             });
@@ -55,7 +55,7 @@ exports.upadteArticle = (req, res) =>{
 exports.deleteArticle = (req, res) =>{
     Article.findOneAndDelete({_id: req.params.id}).then(
         () =>{
-            res.status(200).json({
+            return res.status(200).json({
                 status: 'Success',
                 data: {
                     message: 'Article Deleted Successfully',
@@ -64,7 +64,7 @@ exports.deleteArticle = (req, res) =>{
         }
     ).catch(
         (error) =>{
-            res.status(400).json({
+           return res.status(400).json({
                 status: error,
                 error: "Unable to delete article"
             });
@@ -75,14 +75,14 @@ exports.deleteArticle = (req, res) =>{
 exports.getArticles = (req, res) =>{
         Article.find().then(
             (Article) =>{
-                res.status(200).json({
+                return res.status(200).json({
                   status: "success",
                   data: Article  
                 })
             }
         ).catch(
             (error) => {
-                res.status(400).json({
+                return res.status(400).json({
                     status: error,
                     error: "Unable to fetch lists of articles"
                 });
@@ -94,14 +94,14 @@ exports.getOneArticle = (req, res) =>{
     const id = req.params.id;
     Article.findById({_id: id}).then(
         (Article) =>{
-            res.status(200).json({
+            return res.status(200).json({
                 status: 'Success',
                 data: Article
             });
         }
     ).catch(
         (error) => {
-            res.status(400).json({
+            return res.status(400).json({
                 status: error,
                 error: "Unable to get single article"
             });

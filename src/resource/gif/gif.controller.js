@@ -38,15 +38,15 @@ exports.PostGif = (req, res) =>{
 
 exports.deleteGif = (req, res) =>{
     Gif.findOneAndDelete({_id: req.params.id}).then(
-        ()=> {
-            res.status(200).json({
+        () => {
+           return res.status(200).json({
                 status: "success",
                 data: {
                     message: 'Gif deleted successfully'
                 }
             }).catch(
                 (error) => {
-                    res.status(401).json({
+                  return res.status(401).json({
                         status: error,
                         error: "Unable to delete gif", 
                     })
@@ -59,14 +59,14 @@ exports.deleteGif = (req, res) =>{
 exports.viewGif = (req, res) =>{
         Gif.findById({_id: req.params.id}).then(
             (gif) => {
-                res.status(200).json({
+               return res.status(200).json({
                     status: "success",
                     data: gif
                 })
             }
         ).catch(
             (error) => {
-                res.status(400).json({
+               return res.status(400).json({
                     status: error,
                     error: "Unable to get single gif"
                 })
@@ -74,3 +74,21 @@ exports.viewGif = (req, res) =>{
         )
 }
 
+
+exports.gifFeed = (req, res) => {
+    Gif.find().then(
+        (data) =>{
+            return res.status(200).json({
+                status: "success",
+                data
+            })            
+        }
+    ).catch(
+        (error) => {
+            return res.status(401).json({
+                status: error,
+                error: "Unable to get gif feed"
+            })
+        }
+    )
+}
