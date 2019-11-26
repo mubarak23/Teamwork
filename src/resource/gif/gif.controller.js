@@ -35,3 +35,42 @@ exports.PostGif = (req, res) =>{
         }
     );
 }
+
+exports.deleteGif = (req, res) =>{
+    Gif.findOneAndDelete({_id: req.params.id}).then(
+        ()=> {
+            res.status(200).json({
+                status: "success",
+                data: {
+                    message: 'Gif deleted successfully'
+                }
+            }).catch(
+                (error) => {
+                    res.status(401).json({
+                        status: error,
+                        error: "Unable to delete gif", 
+                    })
+                }
+            )
+        }
+    )
+}
+
+exports.viewGif = (req, res) =>{
+        Gif.findById({_id: req.params.id}).then(
+            (gif) => {
+                res.status(200).json({
+                    status: "success",
+                    data: gif
+                })
+            }
+        ).catch(
+            (error) => {
+                res.status(400).json({
+                    status: error,
+                    error: "Unable to get single gif"
+                })
+            }
+        )
+}
+

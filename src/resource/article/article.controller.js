@@ -103,7 +103,7 @@ exports.getOneArticle = (req, res) =>{
         (error) => {
             res.status(400).json({
                 status: error,
-                error: "Unable to single article"
+                error: "Unable to get single article"
             });
         }
     )
