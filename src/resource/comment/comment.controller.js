@@ -1,6 +1,6 @@
 const Cooment = require('./comment');
 const { getUserId }  = require('../../config/index');
-exports.createCooment = (req, res) => {
+exports.createComment = (req, res) => {
     console.log(req.body);
     const token = req.headers.authorization.split(' ')[1];
     const userId = getUserId(token);

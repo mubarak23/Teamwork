@@ -2,6 +2,8 @@ const User = require('../resource/user/user');
 const Article = require('../resource/article/article');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { dataUri } = require('./multer.config');
+const { uploader } = require('./cloud.config');
 
 exports.encrypt =  (password) => {
     //if(password){
@@ -36,4 +38,24 @@ exports.checkEmail =  (email) => {
      }else{
          return email;
      }
+
 }
+
+
+
+exports.processGifToUrl = (req) => {
+    if(!req){
+        throw 'Must provide gif post';
+    }
+
+    if(req.file.mimetype !== 'image/gif'){
+        throw 'File must be of image/gif type';
+    }
+const file = dataUri(req).content;
+const { uri } = uploader.upload(file);
+
+    return uri;
+}
+
+
+
