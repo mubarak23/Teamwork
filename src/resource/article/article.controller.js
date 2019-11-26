@@ -1,18 +1,18 @@
 const Article = require('./article');
 
 exports.createArticle = (req, res) => {
-    const Article = new Article({
+    console.log(req.body);
+    const article = new Article({
         title: req.body.title,
         body: req.body.body
     });
-    Article.save().then(
+    article.save().then(
         () =>{
             res.status(201).json({
                 status: "success",
                 data: {
                     message: 'Article Created Successfully',
                     articleId:article._id,
-                    createOn: article.create_at.toISOString(),
                     title: article.title
                 }
             })
@@ -89,3 +89,24 @@ exports.getArticles = (req, res) =>{
             }
         )
 }
+
+exports.getOneArticle = (req, res) =>{
+    const id = req.params.id;
+    Article.findById({_id: id}).then(
+        (Article) =>{
+            res.status(200).json({
+                status: 'Success',
+                data: Article
+            });
+        }
+    ).catch(
+        (error) => {
+            res.status(400).json({
+                status: error,
+                error: "Unable to single article"
+            });
+        }
+    )
+}
+
+//route.post('/create', )

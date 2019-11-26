@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jasmine",
-    "start": "server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -19,11 +19,13 @@
   "homepage": "https://github.com/mubarak23/Teamwork#readme",
   "dependencies": {
     "bcrypt": "^3.0.2",
+    "jsonwebtoken": "^8.4.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongodb": "^2.2.33",
     "mongoose": "^5.6.7",
-    "nodeman": "^1.1.2"
+    "nodeman": "^1.1.2",
+    "cloudinary": "^1.16.0"
   },
   "devDependencies": {
     "eslint": "^6.6.0",
