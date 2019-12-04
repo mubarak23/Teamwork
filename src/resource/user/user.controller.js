@@ -3,12 +3,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
+    //return console.log(req.body);
+    //res.json(req.body.email);
     bcrypt.hash(req.body.password, 10).then(
         (hash) => {
+            //return res.json(hash);
             const user = new User({
                 email: req.body.email,
                 password: hash,
-                roleId: req.body.roleId,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 gender: req.body.gender,
@@ -16,6 +18,7 @@ exports.signup = (req, res, next) => {
                 department: req.body.department,
                 address: req.body.address
             });
+            //return console.log(user);
             user.save().then(
                 (user) =>{
                     //return res.json(user);
@@ -40,7 +43,7 @@ exports.signup = (req, res, next) => {
                 (error) => {
                    return res.status(402).json({
                         status: error,
-                        error: "Unable to single article"
+                        error: "Unable to Create Account Successfully"
                     });
                 }
             );
