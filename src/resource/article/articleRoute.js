@@ -1,15 +1,16 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const ArticleCtrl = require('./article.controller');
+const ArticleCtrl = require("./article.controller");
 //auth rout comes here
+const auth = require("../../config/auth");
 
-router.post('/', ArticleCtrl.createArticle);
-router.get('/', ArticleCtrl.getArticles);
-router.post('/:id', ArticleCtrl.upadteArticle);
-router.delete('/:id', ArticleCtrl.deleteArticle);
-router.get('/:id', ArticleCtrl.getOneArticle);
-router.post('/create', function (req, res){
-    res.json(req.body);
-})
+router.post("/", auth, ArticleCtrl.createArticle);
+router.get("/", auth, ArticleCtrl.getArticles);
+router.post("/:id", ArticleCtrl.upadteArticle);
+router.delete("/:id", auth, ArticleCtrl.deleteArticle);
+router.get("/:id", auth, ArticleCtrl.getOneArticle);
+router.post("/create", function(req, res) {
+  res.json(req.body);
+});
 
 module.exports = router;
