@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ArticleCtrl = require("./article.controller");
 //auth rout comes here
-const auth = require("../../config/auth");
+const { auth } = require("../../config/auth");
 
 router.post("/", auth, ArticleCtrl.createArticle);
 router.get("/", auth, ArticleCtrl.getArticles);
