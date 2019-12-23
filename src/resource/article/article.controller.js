@@ -1,9 +1,10 @@
 const Article = require('./article');
 
 exports.createArticle = (req, res) => {
-    console.log(req.body);
+    
     const article = new Article({
         title: req.body.title,
+        userId: req.body.userId,
         body: req.body.body
     });
     article.save().then(
@@ -29,6 +30,7 @@ exports.upadteArticle = (req, res) =>{
     const id = req.params.id;
     const Article_modefied = {
         title: req.body.title,
+        userId: req.body.userId,
         body: req.body.body
     };
     Article.updateOne({_id: id, Article_modefied}).then(

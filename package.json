@@ -19,9 +19,11 @@
   "homepage": "https://github.com/mubarak23/Teamwork#readme",
   "dependencies": {
     "bcrypt": "^3.0.2",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "cloudinary": "^1.16.0",
+    "cors": "^2.8.5",
     "datauri": "^2.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "mongodb": "^2.2.33",
