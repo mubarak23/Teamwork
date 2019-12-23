@@ -1,7 +1,7 @@
 const Article = require('./article');
 
 exports.createArticle = (req, res) => {
-    console.log(req.body);
+    
     const article = new Article({
         title: req.body.title,
         userId: req.body.userId,
