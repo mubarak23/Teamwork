@@ -62,7 +62,7 @@ app.post('/api', function(req, res) {
     res.status(200).json('Corecting issues with data');
 })
 
-app.use('/api/article', articleRoute);
+app.use('/api/articles', articleRoute);
 app.use('/api/user', userRoute);
 
 app.get('/api', function (req, res) {
