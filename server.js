@@ -39,14 +39,13 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 
 
-
-
-
   const db = mongooes.connect("mongodb://root:root123@ds251240.mlab.com:51240/nodehome",
    {useNewUrlParser: true },
+
     (error) =>{
       if(error){
           console.log('internal server error with mlab ');
+          console.log(error);
       }else{
           console.log('Mongooes is connected to mlab DB');
       }

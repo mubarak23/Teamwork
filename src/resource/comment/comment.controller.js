@@ -29,3 +29,23 @@ exports.createComment = (req, res) => {
         });
     });
 } 
+
+//coment feed
+exports.commentFeed = (req, res) =>{
+    const Id = req.params.id;
+    Commnet.findByOne({articleId: Id}).then(
+        (comment) =>{
+            return res.status(200).json({
+                status: 'Sucess',
+                data: comment
+            });
+        }
+    ).catch(
+        (error) =>{
+            return res.status(401).json({
+                status: error,
+                error: "Unable to fetch comment for the article"
+            });
+        }
+    );
+}
