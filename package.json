@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/mubarak23/Teamwork#readme",
   "dependencies": {
-    "bcrypt": "^3.0.2",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.16.0",
     "cors": "^2.8.5",
